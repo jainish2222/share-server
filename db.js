@@ -13,7 +13,7 @@ const dbconnect = async () => {
 dbconnect();
 
 const formDataSchema = new mongoose.Schema({
-  email: { type: String, unique: true, required: true, trim: true, lowercase: true },
+  email: { type: String, unique: true, trim: true, lowercase: true },
   name: { type: String, trim: true },
   surname: { type: String, trim: true },
   college: { type: String, trim: true },
@@ -25,7 +25,7 @@ const formDataSchema = new mongoose.Schema({
   githubLink: { type: String, trim: true },
   liveLink: { type: String, trim: true },
   img: { type: String,require:true }, // New field for image URL
-  agreeTerms: { type: Boolean, required: true },
+  agreeTerms: { type: Boolean},
 });
 
 const FormData = mongoose.model('FormData', formDataSchema);
