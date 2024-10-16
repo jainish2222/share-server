@@ -8,7 +8,7 @@ const { FormData } = require('./db');
 let client;
 (async () => {
   try {
-    const redisUrl = process.env.REDIS_URL || '127.0.0.1:6379';
+    const redisUrl = process.env.REDIS_URL;
     client = redis.createClient({ url: redisUrl });
 
     client.on('error', (error) => {
