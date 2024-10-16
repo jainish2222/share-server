@@ -9,6 +9,7 @@ let client;
 (async () => {
   try {
     client = redis.createClient({ url: "redis://default:Jo1NFNfODbunfMYigOqZ5smz1LgpCdYq@redis-14787.c261.us-east-1-4.ec2.redns.redis-cloud.com:14787"});
+
     client.on('error', (error) => {
       console.error('Redis connection error:', error);
     });
@@ -49,7 +50,7 @@ app.get('/fetch-form', async (req, res) => {
     // If not in cache, fetch from the database
     const formData = await FormData.find();
     // Store the form data in Redis cache for 1 hour (3600 seconds)
-    await client.setEx('form_data', 1000, JSON.stringify(formData));
+    await client.setEx('form_data', 100, JSON.stringify(formData));
     console.log('Fetching form data from database');
     res.json(formData);
   } catch (error) {
