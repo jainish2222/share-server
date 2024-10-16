@@ -5,9 +5,9 @@ const cors = require('cors');
 const { FormData } = require('./db');
 
 // Initialize Redis client and connect
-let client;
 (async () => {
   try {
+    let client;
     client = redis.createClient({ url: "redis://default:Jo1NFNfODbunfMYigOqZ5smz1LgpCdYq@redis-14787.c261.us-east-1-4.ec2.redns.redis-cloud.com:14787"});
 
     client.on('error', (error) => {
@@ -35,7 +35,6 @@ app.post('/submit-form', async (req, res) => {
     await formData.save();
     res.json({ formData });
   } catch (error) {
-    // console.error('Error saving form data:', error);
     res.status(500).json({ error });
   }
 });
@@ -50,7 +49,7 @@ app.get('/fetch-form', async (req, res) => {
     // If not in cache, fetch from the database
     const formData = await FormData.find();
     // Store the form data in Redis cache for 1 hour (3600 seconds)
-    await client.setEx('form_data', 3600, JSON.stringify(formData));
+    await client.setEx('form_data', 2000, JSON.stringify(formData));
     console.log('Fetching form data from database');
     res.json(formData);
   } catch (error) {
