@@ -8,6 +8,7 @@ const { FormData } = require('./db');
 let client;
 (async () => {
   try {
+
     client = redis.createClient({ url: "redis://default:Jo1NFNfODbunfMYigOqZ5smz1LgpCdYq@redis-14787.c261.us-east-1-4.ec2.redns.redis-cloud.com:14787"});
 
     client.on('error', (error) => {
@@ -32,6 +33,7 @@ app.post('/submit-form', async (req, res) => {
   try {
     const formData = new FormData(req.body);
     await formData.save();
+    await client.del('form_data');
     res.json({ formData });
   } catch (error) {
     res.status(500).json({ error });
