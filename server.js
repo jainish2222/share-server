@@ -15,7 +15,6 @@ const { FormData } = require('./db');
     });
 
     await client.connect(); // Redis client connection
-    const endConnect = Date.now(); // End timing for Redis connection
     console.log('Connected to Redis server');
   } catch (error) {
     console.error('Error connecting to Redis:', error);
