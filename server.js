@@ -35,8 +35,8 @@ app.post('/submit-form', async (req, res) => {
     await formData.save();
     res.json({ formData });
   } catch (error) {
-    console.error('Error saving form data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    // console.error('Error saving form data:', error);
+    res.status(500).json({ error });
   }
 });
 
@@ -54,7 +54,7 @@ app.get('/fetch-form', async (req, res) => {
     console.log('Fetching form data from database');
     res.json(formData);
   } catch (error) {
-    console.error('Error fetching form data:', error);
+    // console.error('Error fetching form data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
