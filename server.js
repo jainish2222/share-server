@@ -6,23 +6,29 @@ const { FormData } = require('./db');
 
 // Initialize Redis client and connect
 let client;
+const redis = require('redis');
+
 (async () => {
+  const client = redis.createClient({
+    url: 'redis://127.0.0.1:6379' // Connect to Redis server
+  });
+
+  client.on('error', (error) => {
+    console.error('Redis connection error:', error);
+  });
+
   try {
-     client = redis.createClient({
-      host: '127.0.0.1',
-      port: 6379
-    });
-    
-    client.on('error', (error) => {
-      console.error('Redis connection error:', error);
-    });
-    
-    await client.connect(); // Redis client connection
+    await client.connect();
     console.log('Connected to Redis server');
+    const pong = await client.ping(); // Send a ping to verify connection
+    console.log(pong); // Should print "PONG"
   } catch (error) {
     console.error('Error connecting to Redis:', error);
+  } finally {
+    await client.quit(); // Close the connection
   }
 })();
+
 
 const app = express();
 const port = 5000;
