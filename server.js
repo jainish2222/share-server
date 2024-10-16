@@ -8,8 +8,7 @@ const { FormData } = require('./db');
 let client;
 (async () => {
   try {
-    const redisUrl = process.env.REDIS_URL;
-    client = redis.createClient({ url: redisUrl });
+    client = redis.createClient({ url: "redis://default:Jo1NFNfODbunfMYigOqZ5smz1LgpCdYq@redis-14787.c261.us-east-1-4.ec2.redns.redis-cloud.com:14787"});
 
     client.on('error', (error) => {
       console.error('Redis connection error:', error);
