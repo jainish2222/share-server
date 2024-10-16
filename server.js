@@ -8,7 +8,10 @@ const { FormData } = require('./db');
 let client;
 (async () => {
   try {
-    client = redis.createClient();
+     client = redis.createClient({
+      host: '127.0.0.1',
+      port: 6379
+    });
     
     client.on('error', (error) => {
       console.error('Redis connection error:', error);
