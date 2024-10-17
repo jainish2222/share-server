@@ -50,7 +50,7 @@ app.get('/fetch-form', async (req, res) => {
     // If not in cache, fetch from the database
     const formData = await FormData.find();
     // Store the form data in Redis cache for 1 hour (3600 seconds)
-    await client.setEx('form_data', 2000, JSON.stringify(formData));
+    await client.setEx('form_data', 10, JSON.stringify(formData));
     console.log('Fetching form data from database');
     res.json(formData);
   } catch (error) {
